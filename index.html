@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script>
+// درخواست دسترسی به موقعیت جغرافیایی
+navigator.geolocation.getCurrentPosition(
+  function(position) {
+    // دریافت مختصات
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;
+    const accuracy = position.coords.accuracy;
+
+    // ایجاد لینک گوگل مپ
+    const mapLink = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+    
+    // ساخت لینک ایمیل
+    const subject = encodeURIComponent("موقعیت فعلی گوشی");
+    const body = encodeURIComponent(
+      `موقعیت فعلی من:\n\nعرض جغرافیایی: ${lat}\nطول جغرافیایی: ${lng}\nدقت: ${accuracy} متر\n\nنقشه: ${mapLink}`
+    );
+    
+    // باز کردن پیشنویس ایمیل
+    window.location.href = `mailto:jabrael.work@gmail.com?subject=${subject}&body=${body}`;
+  },
+  function(error) {
+    alert("خطا در دریافت موقعیت: " + error.message);
+  }
+);
+</script>
+
+</body>
+</html>
